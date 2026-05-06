@@ -1,0 +1,42 @@
+.icon-with-text-wrapper .icon-with-text-items { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+.icon-with-text-wrapper .icon-with-text-item { flex: 1 1 calc(25% - 30px); min-width: 250px; }
+.icon-with-text-wrapper .box-item { display: flex; flex-direction: column; height: 100%; transition: transform 0.3s ease, box-shadow 0.3s ease; align-items: center; text-align: center; }
+.icon-with-text-wrapper .box-item.item-alignment--center { align-items: center; text-align: center; }
+.icon-with-text-wrapper .box-item.item-alignment--left { align-items: center; text-align: center; }
+.icon-with-text-wrapper .box-item.card-box { padding: 30px; background: #ffffff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border: 1px solid rgba(0, 0, 0, 0.03); }
+.icon-with-text-wrapper .box-item.card-box:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); }
+.icon-with-text-wrapper .media-item { display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; border-radius: 50%; background: rgba(0, 0, 0, 0.03); padding: 15px; }
+.icon-with-text-wrapper .box-item.item-alignment--left .media-item { margin: 0 auto 20px auto; }
+.icon-with-text-wrapper .media-item img { max-width: 100%; height: auto; object-fit: contain; background: transparent; }
+.icon-with-text-wrapper .media-item.icon-size--small img { width: 40px; height: 40px; }
+.icon-with-text-wrapper .media-item.icon-size--medium img { width: 60px; height: 60px; }
+.icon-with-text-wrapper .media-item.icon-size--large img { width: 80px; height: 80px; }
+.icon-with-text-wrapper .item-title { font-size: 1.8rem; font-weight: 700; line-height: 1.3; margin: 0 0 12px 0; color: inherit; }
+.icon-with-text-wrapper .texts { font-size: 1.5rem; line-height: 1.6; opacity: 0.8; margin: 0; }
+.icon-with-text-wrapper .texts p { margin: 0; }
+.icon-with-text-wrapper .swiper-main-wrapper { position: relative; padding-bottom: 40px; }
+.icon-with-text-wrapper .nav-btns { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); z-index: 10; pointer-events: none; }
+.icon-with-text-wrapper .btn-arrow { pointer-events: auto; width: 44px; height: 44px; background: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; transition: all 0.2s ease; color: #000; margin: 0; }
+.icon-with-text-wrapper .btn-arrow:hover { background: #000000; color: #ffffff; transform: scale(1.05); }
+.icon-with-text-wrapper .btn-arrow svg { width: 20px; height: 20px; fill: currentColor; }
+.icon-with-text-wrapper .swiper-button-prev { left: -22px; position: absolute; }
+.icon-with-text-wrapper .swiper-button-next { right: -22px; position: absolute; }
+.icon-with-text-wrapper .swiper-button-prev::after, .icon-with-text-wrapper .swiper-button-next::after { display: none; }
+.icon-with-text-wrapper .swiper-pagination { bottom: 0 !important; }
+.icon-with-text-wrapper .swiper-pagination-bullet { background: #000; opacity: 0.2; width: 8px; height: 8px; transition: all 0.3s ease; }
+.icon-with-text-wrapper .swiper-pagination-bullet-active { opacity: 1; transform: scale(1.2); }
+.icon-with-text-wrapper .sec-head { margin-bottom: 40px; text-align: center; }
+.icon-with-text-wrapper .sec-head.item-alignment--center { text-align: center; }
+.icon-with-text-wrapper .sec-head.item-alignment--left { text-align: center; }
+.icon-with-text-wrapper .sec-title { font-size: 3.2rem; font-weight: 700; margin: 0 0 10px 0; line-height: 1.2; }
+.icon-with-text-wrapper .sub-title { font-size: 1.6rem; opacity: 0.8; margin: 0; }
+@media screen and (max-width: 749px) {
+  .icon-with-text-wrapper .icon-with-text-items { gap: 20px; }
+  .icon-with-text-wrapper .icon-with-text-item { flex: 1 1 100%; }
+  .icon-with-text-wrapper .box-item.card-box { padding: 24px; }
+  .icon-with-text-wrapper .item-title { font-size: 1.6rem; }
+  .icon-with-text-wrapper .texts { font-size: 1.4rem; }
+  .icon-with-text-wrapper .nav-btns { display: none; }
+  .icon-with-text-wrapper .sec-head { margin-bottom: 30px; }
+  .icon-with-text-wrapper .sec-title { font-size: 2.6rem; }
+}

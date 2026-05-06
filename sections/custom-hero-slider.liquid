@@ -1,0 +1,235 @@
+{{ 'custom-hero-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="custom-hero-slider section-{{ section.id }}-padding" {% if section.settings.auto_play %}data-autoplay="true" data-speed="{{ section.settings.change_slides_speed }}"{% endif %}>
+  <div class="swiper">
+    <ul class="swiper-wrapper" id="Slider-{{ section.id }}" role="list" style="padding: 0; margin: 0; list-style: none;">
+      {%- for block in section.blocks -%}
+        <li class="swiper-slide custom-hero-slider__slide custom-hero-slider__slide--{{ section.settings.slide_height }}" id="Slide-{{ section.id }}-{{ forloop.index }}" {{ block.shopify_attributes }}>
+          
+          <div class="custom-hero-slider__image-wrapper">
+            {%- if block.settings.image != blank -%}
+              {%- assign image_class = 'custom-hero-slider__image--desktop' -%}
+              {%- if block.settings.image_mobile != blank -%}
+                {%- assign image_class = 'custom-hero-slider__image--desktop has-mobile' -%}
+              {%- endif -%}
+              {{ block.settings.image | image_url: width: 3840 | image_tag: 
+                loading: 'lazy',
+                class: image_class
+              }}
+              
+              {%- if block.settings.image_mobile != blank -%}
+                {{ block.settings.image_mobile | image_url: width: 1500 | image_tag: 
+                  loading: 'lazy',
+                  class: 'custom-hero-slider__image--mobile'
+                }}
+              {%- endif -%}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+
+          <div class="custom-hero-slider__overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,{{ section.settings.image_overlay_opacity | divided_by: 100.0 }}) 100%);"></div>
+
+          <div class="custom-hero-slider__content">
+            {%- if block.settings.heading != blank -%}
+              <h2 class="custom-hero-slider__heading">{{ block.settings.heading | escape }}</h2>
+            {%- endif -%}
+            
+            {%- if block.settings.subheading != blank -%}
+              <p class="custom-hero-slider__subheading">{{ block.settings.subheading | escape }}</p>
+            {%- endif -%}
+
+            <div class="custom-hero-slider__buttons">
+              {%- if block.settings.button_label_1 != blank -%}
+                <a {% if block.settings.button_link_1 == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.button_link_1 }}"{% endif %} class="custom-hero-slider__btn custom-hero-slider__btn--primary">
+                  {{- block.settings.button_label_1 | escape -}}
+                </a>
+              {%- endif -%}
+
+              {%- if block.settings.button_label_2 != blank -%}
+                <a {% if block.settings.button_link_2 == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.button_link_2 }}"{% endif %} class="custom-hero-slider__btn custom-hero-slider__btn--secondary">
+                  {{- block.settings.button_label_2 | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.subtext != blank -%}
+              <div class="custom-hero-slider__subtext">{{ block.settings.subtext | escape }}</div>
+            {%- endif -%}
+          </div>
+
+        </li>
+      {%- endfor -%}
+    </ul>
+    
+    {%- if section.blocks.size > 1 -%}
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Hero Slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "slide_height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large (Full Height)"
+        }
+      ],
+      "default": "medium",
+      "label": "Slide Height"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Bottom overlay opacity",
+      "default": 80
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_play",
+      "label": "Auto-rotate slides",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 3,
+      "max": 9,
+      "step": 2,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Mobile Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "YOUR DESIGNER PIECES DESERVE THEIR NEXT CHAPTER.",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "default": "A service that sells pre-loved South Asian outfits so you don't have to.",
+          "label": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "START SELLING ->",
+          "label": "Primary Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "Primary Button Link"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "default": "BROWSE COLLECTION",
+          "label": "Secondary Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Secondary Button Link"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "default": "Zero Work • Zero Fees (First 3) • Full Control",
+          "label": "Small Subtext"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Hero Slider",
+      "blocks": [
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

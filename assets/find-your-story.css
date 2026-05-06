@@ -1,0 +1,32 @@
+.find-your-story-section { position: relative; }
+.find-your-story-section .find-your-story__media { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background-color: rgb(var(--color-background)); }
+.find-your-story-section .find-your-story__background { width: 100%; height: 100%; }
+.find-your-story-section .find-your-story__background img { width: 100%; height: 100%; object-fit: cover; }
+.find-your-story-section .find-your-story__overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; }
+.find-your-story-section .page-width { position: relative; z-index: 1; }
+
+.find-your-story-section .find-your-story__content { max-width: 72rem; margin: 0 auto; }
+.find-your-story-section .title { margin-bottom: 2rem; }
+.find-your-story-section .rte { margin-top: 0; margin-bottom: 3rem; font-size: 1.8rem; }
+
+/* When an image is used, we assume a dark overlay, so text should be light. */
+.find-your-story-section[data-has-image="true"] .title,
+.find-your-story-section[data-has-image="true"] .rte,
+.find-your-story-section[data-has-image="true"] .rte p { color: #ffffff; }
+.find-your-story-section[data-has-image="true"] .button { --color-button: 255, 255, 255; --color-button-text: 0, 0, 0; }
+
+.find-your-story-section .story-list__grid { margin-top: 4rem; }
+.find-your-story-section .story-list__card { display: flex; flex-direction: column; height: 100%; text-align: center; }
+.find-your-story-section .story-list__image-wrapper { margin-bottom: 2rem; border-radius: var(--media-radius); overflow: hidden; }
+.find-your-story-section .story-list__title { margin-top: 0; margin-bottom: 1rem; }
+.find-your-story-section .story-list__content { margin-top: 0; font-size: 1.5rem; color: rgba(var(--color-foreground), 0.75); }
+
+.find-your-story-section[data-has-image="true"] .story-list__title,
+.find-your-story-section[data-has-image="true"] .story-list__content { color: rgba(255, 255, 255, 0.85); }
+
+@media screen and (min-width: 750px) {
+
+  .find-your-story-section .rte { font-size: 2rem; }
+
+}
+ 

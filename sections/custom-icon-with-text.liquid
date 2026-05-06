@@ -1,0 +1,483 @@
+{{ 'icon-with-text.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobi }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobi }}px;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+    .icon-with-text-wrapper .icon-with-text-container .texts,
+    .icon-with-text-wrapper .icon-with-text-container .texts p,
+    .icon-with-text-wrapper .icon-with-text-container .texts a { color: {{ section.settings.text_color }}; }
+{%- endstyle -%}
+
+{%- capture slider_options -%}
+  "slidesPerView": 3,
+  "spaceBetween": 20,
+  "loop": true,
+  
+  {% if section.settings.show_pagination %}
+  "pagination": {
+    "el": "#shopify-section-{{ section.id }} .swiper-pagination",
+    "clickable": true
+  },
+{% endif %}
+  "autoplay": {
+        "delay": 3000,
+        "disableOnInteraction": false
+  },
+  {% if section.settings.navigation %}
+  "navigation": {
+    "nextEl": "#shopify-section-{{ section.id }} .swiper-button-next",
+    "prevEl": "#shopify-section-{{ section.id }} .swiper-button-prev"
+  },
+  {% endif %}
+  "breakpoints": {
+    "0": {
+      "slidesPerView": 1,
+      "spaceBetween": 15
+    },
+    "749": {
+      "slidesPerView": 2,
+      "spaceBetween": 20
+    },
+    "990": {
+      "slidesPerView": {% if section.settings.auto_width %}"auto"{% else %}3{% endif %},
+      "spaceBetween": 40
+    },
+    "1400": {
+      "slidesPerView": {% if section.settings.auto_width %}"auto"{% else %}4{% endif %},
+      "spaceBetween": {{ section.settings.space_between_slide }}
+    }
+  }
+{%- endcapture -%}
+
+{%- if section.blocks.size > 0 -%}
+<div class="section-{{ section.id }} section-{{ section.id }}-padding section-{{ section.id }}-margin color-{{ section.settings.color_scheme }} gradient section-main-box">
+  <div class="page-width">
+    {% if section.settings.heading != blank or section.settings.text != blank %}
+      <div class="sec-head center item-alignment--{{ section.settings.content_alignment }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {% if section.settings.heading != blank %}
+          <h2 class="sec-title">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="sec-text sub-title">{{ section.settings.text }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="icon-with-text-container container-style--{{ section.settings.box_style }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {% if section.settings.enable_slider %}
+        <div class="swiper-main-wrapper">
+          <div class="swiper" data-slider-options='{ {{ slider_options }} }'>
+            <div class="swiper-wrapper">
+              {%- for block in section.blocks -%}
+                <div
+                  class="swiper-slide {% if section.settings.auto_width %} auto-width{% endif %} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                  {% if settings.animations_reveal_on_scroll %}
+                    style="--animation-order: {{ forloop.index }};"
+                  {% endif %}
+                >
+                  {%- case block.type -%}
+                    {%- when 'icon_with_text' -%}
+                      <div class="box-item {% if section.settings.box_style == 'box' %}card-box{% endif %} item-alignment--{{ section.settings.content_alignment }} content-width--{{ section.settings.content_width }}">
+                        {%- assign icon = block.settings.icon -%}
+                        {% if icon != blank %}
+                          <div class="media-item icon-size--{{ section.settings.icon_size }}">
+                            {{ icon | image_url: width: icon.width | image_tag: class: 'media', loading: 'lazy' }}
+                          </div>
+                        {% endif %}
+                        {% if block.settings.title != blank or block.settings.content != blank %}
+                          <div class="content {{ section.settings.content_alignment }}">
+                            {% if block.settings.title != blank %}
+                              <div class="item-title h3">{{ block.settings.title | replace: '++', '<br/>'  }}</div>
+                            {% endif %}
+                            {% if block.settings.content != blank %}
+                              <div class="texts">
+                                {{ block.settings.content }}
+                              </div>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      </div>
+                  {%- endcase -%}
+                </div>
+              {%- endfor -%}
+            </div>
+
+          </div>
+          {% if section.settings.navigation %}
+            <div
+              class="
+                nav-btns
+                {% if section.settings.show_navigation_in == 'desktop' %}small-hide{% endif %}
+                {% if section.settings.show_navigation_in == 'mobile' %}medium-hide large-up-hide{% endif %}
+              "
+            >
+              <div class="btn-arrow swiper-button-prev">{{ 'left-arrow.svg' | inline_asset_content }}</div>
+              <div class="btn-arrow swiper-button-next">{{ 'right-arrow.svg' | inline_asset_content }}</div>
+            </div>
+          {% endif %}
+
+          {% if section.settings.show_pagination %}
+            <div
+              class="
+                swiper-pagination {{ section.settings.pagination_type }}
+                {% if section.settings.show_pagination_in == 'desktop' %}small-hide{% endif %}
+                {% if section.settings.show_pagination_in == 'mobile' %}medium-hide large-up-hide{% endif %}
+              "
+            ></div>
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="icon-with-text-items {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {%- for block in section.blocks -%}
+            <div class="icon-with-text-item">
+              {%- case block.type -%}
+                {%- when 'icon_with_text' -%}
+                  <div
+                    class="box-item {% if section.settings.box_style == 'box' %}card-box{% endif %} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} item-alignment--{{ section.settings.content_alignment }} content-width--{{ section.settings.content_width }}"
+                    {% if settings.animations_reveal_on_scroll %}
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {%- assign icon = block.settings.icon -%}
+                    {% if icon != blank %}
+                      <div class="media-item icon-size--{{ section.settings.icon_size }}">
+                        {{ icon | image_url: width: icon.width | image_tag: class: 'media', loading: 'lazy' }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.title != blank or block.settings.content != blank %}
+                      <div class="content {{ section.settings.content_alignment }}">
+                        {% if block.settings.title != blank %}
+                          <div class="item-title h3">{{ block.settings.title | replace: '++', '<br/>' }}</div>
+                        {% endif %}
+                        {% if block.settings.content != blank %}
+                          <div class="texts">
+                            {{ block.settings.content }}
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Icon with text",
+  "class": "icon-with-text-wrapper",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },    
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },  
+    {
+      "type": "select",
+      "id": "box_style",
+      "options": [
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }       
+      ],
+      "default": "normal",
+      "label": "Box style"
+    },
+    {
+      "type": "select",
+      "id": "icon_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }       
+      ],
+      "default": "small",
+      "label": "Icon Size"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }       
+      ],
+      "default": "left",
+      "label": "Contnet Alignment"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }       
+      ],
+      "default": "large",
+      "label": "Content Width"
+    },
+    {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color"
+    },
+    {
+      "type": "header",
+      "content": "Slider Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_slider",
+      "default": false,
+      "label": "Enable Slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_width",
+      "default": false,
+      "label": "Auto width"
+    },
+    {
+      "type": "range",
+      "id": "space_between_slide",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Space Between Slide",
+      "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "default": false,
+      "label": "Show pagination"
+    },
+    {
+      "type": "select",
+      "id": "show_pagination_in",
+      "options": [
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "desktop",
+          "label": "Desktop"
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile"
+        }
+      ],
+      "default": "both",
+      "label": "Show pagination in"
+    },
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "options": [
+        {
+          "value": "dot",
+          "label": "Dot"
+        },
+        {
+          "value": "border",
+          "label": "Dot border"
+        },
+        {
+          "value": "line",
+          "label": "Line"
+        },
+        {
+          "value": "number",
+          "label": "Numer"
+        }
+      ],
+      "default": "dot",
+      "label": "Pagination type"
+    },
+    {
+      "type": "checkbox",
+      "id": "navigation",
+      "label": "Show navigation",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "show_navigation_in",
+      "options": [
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "desktop",
+          "label": "Desktop"
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile"
+        }
+      ],
+      "default": "both",
+      "label": "Show navigation in"
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": -150,
+      "max": 150,
+      "step": 3,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": -150,
+      "max": 150,
+      "step": 3,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section Settings For Mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobi",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobi",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 25
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Icon with text",
+      "type": "icon_with_text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "info":"if apply '++' then it's break a line in desktop only"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon with text"
+    }
+  ]
+}
+{% endschema %}

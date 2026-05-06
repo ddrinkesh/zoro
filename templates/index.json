@@ -1,0 +1,200 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_hero_slider_YRcnmW": {
+      "type": "custom-hero-slider",
+      "blocks": {
+        "slide_JgQV84": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/urban-vintage-denimn-on-hangers.jpg",
+            "heading": "YOUR DESIGNER PIECES DESERVE THEIR NEXT CHAPTER.",
+            "subheading": "A service that sells pre-loved South Asian outfits so you don't have to.",
+            "button_label_1": "START SELLING ->",
+            "button_link_1": "",
+            "button_label_2": "BROWSE COLLECTION",
+            "button_link_2": "",
+            "subtext": "Zero Work • Zero Fees (First 3) • Full Control"
+          }
+        },
+        "slide_RVF7cC": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_81.png",
+            "heading": "YOUR DESIGNER PIECES DESERVE THEIR NEXT CHAPTER.",
+            "subheading": "A service that sells pre-loved South Asian outfits so you don't have to.",
+            "button_label_1": "START SELLING ->",
+            "button_link_1": "",
+            "button_label_2": "BROWSE COLLECTION",
+            "button_link_2": "",
+            "subtext": "Zero Work • Zero Fees (First 3) • Full Control"
+          }
+        }
+      },
+      "block_order": [
+        "slide_JgQV84",
+        "slide_RVF7cC"
+      ],
+      "name": "Custom Hero Slider",
+      "settings": {
+        "slide_height": "medium",
+        "image_overlay_opacity": 80,
+        "auto_play": false,
+        "change_slides_speed": 5,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_icon_with_text_dJgyBN": {
+      "type": "custom-icon-with-text",
+      "blocks": {
+        "icon_with_text_PdRp6N": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/icon1.png",
+            "title": "Premium Quality",
+            "content": "<p>We source only the finest materials and employ rigorous quality control standards to ensure every product meets our high expectations. Your satisfaction is our priority.</p>"
+          }
+        },
+        "icon_with_text_d9fPte": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/icon3.png",
+            "title": "Premium Quality",
+            "content": "<p>We source only the finest materials and employ rigorous quality control standards to ensure every product meets our high expectations. Your satisfaction is our priority.</p>"
+          }
+        },
+        "icon_with_text_8Y9E7G": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/icon2.png",
+            "title": "Premium Quality",
+            "content": "<p>We source only the finest materials and employ rigorous quality control standards to ensure every product meets our high expectations. Your satisfaction is our priority.</p>"
+          }
+        },
+        "icon_with_text_gje4HK": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/icon4.png",
+            "title": "Premium Quality",
+            "content": "<p>We source only the finest materials and employ rigorous quality control standards to ensure every product meets our high expectations. Your satisfaction is our priority.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_PdRp6N",
+        "icon_with_text_d9fPte",
+        "icon_with_text_8Y9E7G",
+        "icon_with_text_gje4HK"
+      ],
+      "name": "Icon with text",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "",
+        "text": "",
+        "box_style": "box",
+        "icon_size": "small",
+        "content_alignment": "center",
+        "content_width": "large",
+        "text_color": "#000000",
+        "enable_slider": false,
+        "auto_width": false,
+        "space_between_slide": 40,
+        "show_pagination": false,
+        "show_pagination_in": "both",
+        "pagination_type": "dot",
+        "navigation": true,
+        "show_navigation_in": "both",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top_mobi": 25,
+        "padding_bottom_mobi": 25
+      }
+    },
+    "featured_product_UVCwgW": {
+      "type": "featured-product",
+      "blocks": {
+        "text_AMGHr7": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_AmPyXX": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_hxVdVh": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_LAEziz": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_x6cJR9": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_cMPgNe": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_kXYXKT": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_AMGHr7",
+        "title_AmPyXX",
+        "price_hxVdVh",
+        "variant_picker_LAEziz",
+        "quantity_selector_x6cJR9",
+        "buy_buttons_cMPgNe",
+        "share_kXYXKT"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "",
+        "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "custom_hero_slider_YRcnmW",
+    "custom_icon_with_text_dJgyBN",
+    "featured_product_UVCwgW"
+  ]
+}
